@@ -1,3 +1,4 @@
+
 resource "aws_vpc" "myvpc" {
   cidr_block = var.cidr
 }
@@ -71,7 +72,7 @@ resource "aws_security_group" "webSg" {
 }
 
 resource "aws_s3_bucket" "example" {
-  bucket = "abhisheksterraform2023project"
+  bucket = "e-commerce-app-bucket"
 }
 
 
@@ -143,3 +144,40 @@ resource "aws_lb_listener" "listener" {
 output "loadbalancerdns" {
   value = aws_lb.myalb.dns_name
 }
+
+
+/*
+provider "aws" {
+  alias = "us-east-1"
+  region = "us-east-1"
+  
+}
+
+provider "aws" {
+  alias = "eu-west-2"
+  region = "eu-west-2"
+  
+}
+
+resource "aws_instance" "server-a" {
+  ami = "ami-053b0d53c279acc90"
+  instance_type = "t2.micro"
+  provider = aws.us-east-1
+  subnet_id = "subnet-04adb34bd5afb848a"
+
+tags = {
+  name ="web_server_1"
+}  
+}
+
+resource "aws_instance" "server-b" {
+  ami = "ami-0eb260c4d5475b901"
+  instance_type = "t2.micro"
+  provider = aws.eu-west-2
+  subnet_id = "subnet-033d584dfa11e3ec9"
+
+tags = {
+  name ="web_server_2"
+}  
+}
+*/
