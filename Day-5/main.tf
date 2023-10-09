@@ -9,7 +9,7 @@ variable "cidr" {
 
 resource "aws_key_pair" "example" {
   key_name   = "terraform-demo-abhi"  # Replace with your desired key name
-  public_key = file("~/.ssh/id_rsa.pub")  # Replace with the path to your public key file
+  public_key = file("/home/savvytech/.ssh/webserver.pub")  # Replace with the path to your public key file
 }
 
 resource "aws_vpc" "myvpc" {
@@ -82,13 +82,13 @@ resource "aws_instance" "server" {
   connection {
     type        = "ssh"
     user        = "ubuntu"  # Replace with the appropriate username for your EC2 instance
-    private_key = file("~/.ssh/id_rsa")  # Replace with the path to your private key
+    private_key = file("/home/savvytech/.ssh/webserver")  # Replace with the path to your private key
     host        = self.public_ip
   }
 
   # File provisioner to copy a file from local to the remote EC2 instance
   provisioner "file" {
-    source      = "app.py"  # Replace with the path to your local file
+    source      = "/workspaces/terraform-zero-to-hero/Day-5/app.py"  # Replace with the path to your local file
     destination = "/home/ubuntu/app.py"  # Replace with the path on the remote instance
   }
 
